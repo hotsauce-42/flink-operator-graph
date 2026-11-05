@@ -1,0 +1,11 @@
+# Copy to graphs.yaml and list your jobs. Jar paths are relative to this file.
+defaults:
+  keyByAsNode: true      # draw keyBy as a diamond node (false: label on the edge)
+  collapseSinks: true    # merge Sink V2 "X: Writer" + "X: Committer" into one node
+  parallelism: 1         # default parallelism for operators that don't set one
+
+jobs:
+  - name: order-enrichment                       # output: order-enrichment.drawio / .mmd
+    jar: ../order-enrichment/target/order-enrichment.jar
+    mainClass: com.acme.OrderEnrichmentJob       # optional if the manifest has Main-Class
+    args: ["--config", "src/test/resources/dummy.properties"]   # main() really runs up to execute()

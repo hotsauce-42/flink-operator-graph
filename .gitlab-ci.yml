@@ -1,0 +1,13 @@
+# Builds the generator. Job repos download the jar from the latest main pipeline (see README).
+build:
+  image: maven:3.9-eclipse-temurin-17
+  variables:
+    MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2"
+  cache:
+    paths: [.m2/]
+  script:
+    - mvn -B package
+  artifacts:
+    paths: [target/flink-operator-graph.jar]
+    reports:
+      junit: target/surefire-reports/TEST-*.xml
